@@ -1,8 +1,10 @@
+import './App.css';
+
 import React from 'react';
 import { Routes, Route } from 'react-router-dom';
 
 // Pages
-import Skills from './pages/Skills';
+import SkillsReference from './pages/SkillsReference';
 
 
 // Components
@@ -18,7 +20,7 @@ function App() {
         <>
             <Navigation />
             <Routes>
-                <Route path="/" element={<Skills />} />
+                <Route path="/" element={<SkillsReference />} />
             </Routes>
         </>
     );
