@@ -1,9 +1,16 @@
-const ClassDropdown = () => {
+const ClassDropdown = ({ classes, id, setID }) => {
     return (
-        <select className="dropdown">
+        <select
+            className="dropdown"
+            value={id}
+            onChange={(e) => {
+                setID(e.target.value)
+            }}
+        >
             <option value="">-- Select --</option>
-            <option value="1">Templar</option>
-            <option value="2">Ranger</option>
+            {classes.map((cls, index) => (
+                <option value={cls['id']} key={index}>{cls['name']}</option>
+            ))}
         </select>
     )
 }

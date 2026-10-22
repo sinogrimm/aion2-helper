@@ -30,3 +30,30 @@
     background-color: whitesmoke;
   }
 }
+
+.filterbar {
+  display: flex;
+  
+  & > button {
+    padding: 5px 0px;
+    flex: 1;
+  }
+}
+
+.skillslist {
+  height: 475px;
+  overflow-y: auto;
+  margin: 10px 0px;
+  display: flex;
+  flex-direction: column;
+}
+
+.skillcard {
+  text-align: left;
+}
+
+.selectedSkillcard {
+  text-align: left;
+  border: 2px darkblue solid;
+  background-color: lightblue;
+}
