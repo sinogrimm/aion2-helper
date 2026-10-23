@@ -8,7 +8,7 @@ const getSkills = async(id) => {
 // will be implemented with filter microservice in the next sprint
 const getSkillsByTag = (skills, tag_id) => {
     let filteredSkills = [];
-    
+
     for (let i = 0; i < skills.length; ++i) {
         let currID = skills[i]['tag_id'];
         if (currID === tag_id) {
@@ -19,4 +19,17 @@ const getSkillsByTag = (skills, tag_id) => {
     return filteredSkills;
 }
 
-export { getSkills, getSkillsByTag }
+// will be implemented with image microservice in next sprint
+const getSkillImages = (skills) => {
+    let images = {};
+
+    for (let i = 0; i < skills.length; ++i) {
+        let id = skills[i]['id'];
+        let path = skills[i]['name'].toLowerCase().replaceAll(' ', '_');
+        images[id] = `/${path}.webp`
+    }
+
+    return images;
+}
+
+export { getSkills, getSkillsByTag, getSkillImages }

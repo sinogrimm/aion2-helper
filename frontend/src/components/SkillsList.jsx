@@ -1,4 +1,4 @@
-function SkillsList({ tags, tagID, setTagID, skills, id, setID }) {
+function SkillsList({ tags, tagID, setTagID, skills, id, setID, images }) {
     return (
         <div className="column">
             <h3>Skills</h3>
@@ -33,8 +33,11 @@ function SkillsList({ tags, tagID, setTagID, skills, id, setID }) {
                             }
                         }}
                     >
-                        <p>{skill['name']}</p>
-                        <p>{skill['brief_descr']}</p>
+                        <img src={images[skill['id']]} className="skillcardImage"/>
+                        <div className="skillPreview">
+                            <p>{skill['name']}</p>
+                            <p>{skill['brief_descr']}</p>
+                        </div>
                     </button>
                 ))}
             </div>

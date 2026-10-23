@@ -5,7 +5,7 @@ import ClassDropdown from "../components/ClassDropdown";
 import SkillsList from "../components/SkillsList";
 import SkillDetails from "../components/SkillDetails";
 import { getClasses } from '../../api/ClassAPI';
-import { getSkills, getSkillsByTag } from '../../api/SkillsAPI';
+import { getSkills, getSkillsByTag, getSkillImages } from '../../api/SkillsAPI';
 import { getTags } from '../../api/TagAPI';
 
 function SkillsReference() {
@@ -13,6 +13,7 @@ function SkillsReference() {
     const [selectedClassID, setSelectedClassID] = useState('');
 
     const [skills, setSkills] = useState([]); // stores all skills of selected class
+    const [images, setImages] = useState([]); // stores all images for selected class
 
     const [tags, setTags] = useState([]);
     const [selectedTagID, setSelectedTagID] = useState('');
@@ -53,10 +54,13 @@ function SkillsReference() {
                     const { skills } = await getSkills(selectedClassID);
                     setSkills(skills);
                     setDisplayedSkills(skills);
+                    const images = getSkillImages(skills);
+                    setImages(images);
                 }
 
             } else {
                 setSkills([]);
+                setDisplayedSkills([]);
             }
         } catch (err) {
             console.log(`Failed to load skills list: ${err.message}`);
@@ -85,7 +89,7 @@ function SkillsReference() {
                 <SkillsList 
                     tags={tags} tagID={selectedTagID} setTagID={setSelectedTagID}
                     skills={displayedSkills} id={selectedSkillID} setID={setSelectedSkillID}
-
+                    images={images}
                 />
                 <SkillDetails/>
             </div>

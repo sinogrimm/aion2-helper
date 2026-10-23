@@ -55,10 +55,23 @@
 
 .skillcard {
   text-align: left;
+  display: flex;
 }
 
 .selectedSkillcard {
   text-align: left;
   border: 2px darkblue solid;
   background-color: lightblue;
+  display: flex;
+}
+
+.skillcardImage {
+  margin: 10px 5px;
+  height: 50px;
+  width: 50px;
+  object-fit: contain;
+}
+
+.skillPreview {
+  margin-left: 5px;
 }
