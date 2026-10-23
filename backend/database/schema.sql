@@ -30,7 +30,7 @@ CREATE TABLE skills (
     name varchar(50) UNIQUE NOT NULL,
     brief_descr varchar(255) NOT NULL,
     detailed_descr TEXT NOT NULL,
-    cooldown INT NOT NULL DEFAULT 0,
+    cooldown INT DEFAULT 0,
     lv_unlock INT NOT NULL DEFAULT 1,
     class_id INT NOT NULL,
     tag_id INT NOT NULL,

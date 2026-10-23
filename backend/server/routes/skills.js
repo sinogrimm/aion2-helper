@@ -10,6 +10,7 @@ router.get('/skills/:id', async (req, res) => {
         const query = `
             SELECT id, name, brief_descr, tag_id FROM skills
             WHERE class_id = ${id}
+            ORDER BY lv_unlock ASC
             ;`;
 
         const [skills] = await db.query(query);
