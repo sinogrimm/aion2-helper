@@ -3,7 +3,7 @@ function Navigation() {
       
         <nav className="navbar">
             <div className="logo">
-                AION2 Helper Tool
+                AION2 Helper
             </div>
             <div className="links">
                 <a href="/">Skills</a>

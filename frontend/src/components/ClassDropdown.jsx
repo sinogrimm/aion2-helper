@@ -4,7 +4,7 @@ const ClassDropdown = ({ classes, id, setID }) => {
             className="dropdown"
             value={id}
             onChange={(e) => {
-                setID(e.target.value)
+                setID(e.target.value);
             }}
         >
             <option value="">-- Select --</option>

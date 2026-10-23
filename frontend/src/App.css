@@ -48,6 +48,11 @@
   flex-direction: column;
 }
 
+.selectedFilter {
+  border: 2px darkblue solid;
+  background-color: lightblue;
+}
+
 .skillcard {
   text-align: left;
 }

@@ -1,12 +1,23 @@
-function SkillsList({ skills, id, setID }) {
+function SkillsList({ tags, tagID, setTagID, skills, id, setID }) {
     return (
         <div className="column">
             <h3>Skills</h3>
             <hr/>
             <div className="filterbar">
-                <button>Active</button>
-                <button>Passive</button>
-                <button>Stigma</button>
+                {tags.map((tag, index) => (
+                    <button
+                        className={tag['id'] === Number(tagID) ? "selectedFilter" : "filterbutton"}
+                        value={tag['id']}
+                        key={index}
+                        onClick={(e) => {
+                            if (tag['id'] === Number(tagID)) {
+                                setTagID('');
+                            } else {
+                                setTagID(e.currentTarget.value);
+                            }
+                        }}
+                    >{tag['name']}</button>
+                ))}
             </div>
             <div className="skillslist">
                 {skills.map((skill, index) => (
