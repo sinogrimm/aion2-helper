@@ -107,4 +107,13 @@
 
 .details {
   text-align: left;
+  white-space: pre-line;
+}
+
+#changeable {
+  color: red;
+}
+
+.red {
+  color: red;
 }

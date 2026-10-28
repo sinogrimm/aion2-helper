@@ -41,7 +41,7 @@ const getSkill = async (id) => {
     // destructure object, then array
     const {skill: [skill]} = await res.json();
     //console.log(skill);
-    
+
     return skill;
 }
 
@@ -51,4 +51,12 @@ const getImage = (skName) => {
     return image;
 }
 
-export { getSkills, getSkillsByTag, getSkillImages, getSkill, getImage }
+const getLvInfo = async (skID) => {
+    const res = await fetch(`${backendURL}/lvinfo/${skID}`);
+    const {lvInfo} = await res.json();
+    //console.log(lvInfo);
+
+    return lvInfo;
+}
+
+export { getSkills, getSkillsByTag, getSkillImages, getSkill, getImage, getLvInfo }

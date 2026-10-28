@@ -46,8 +46,9 @@ CREATE TABLE skills (
 CREATE TABLE skill_levels (
     skill_id INT NOT NULL,
     level INT NOT NULL,
-    min_dmg INT NOT NULL,
-    max_dmg INT,
+    var1 INT NOT NULL,
+    var2 INT,
+    var3 INT,
     PRIMARY KEY (skill_id, level),
     FOREIGN KEY (skill_id) REFERENCES skills(id)
 );

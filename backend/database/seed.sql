@@ -26,8 +26,8 @@ VALUES
     DEFAULT,
     'Combo for mana regeneration.',
     CONCAT (
-        'Deals {min_dmg} damage to up to 4 enemies within 4m and increases Enmity.',
-        'Restores 100MP.'
+        'Deals X damage to up to 4 enemies within 4m and increases Enmity.',
+        ' Restores 100MP.'
     ),
     DEFAULT,
     @templar_id,
@@ -90,7 +90,7 @@ VALUES
     'Attack and debuff triggered on block.',
     CONCAT (
         'Deals {min-dmg} damage to up to 4 enemies within 4m and inflicts Debilitate for 5s on Block.',
-        ' Debilitate: Reduces Defense by 25%.'
+        '\n','Debilitate: Reduces Defense by 25%.'
     ),
     10,
     @templar_id,
@@ -101,10 +101,10 @@ VALUES
     8,
     'Defensive that triggers Judgement.',
     CONCAT (
-        'Deals {min_dmg} damage to up to 4 enemies within 5m of the caster.',
-        ' Immediately restores {min_hp}-{max_hp} HP and grants Warding to the caster for 10s.',
+        'Deals X damage to up to 4 enemies within 5m of the caster.',
+        ' Immediately restores X-X HP and grants Warding to the caster for 10s.',
         ' Triggers [Judgement] for 2s.',
-        ' Warding: Increases PvE Damage Tolerance by 20% and Pvp Damage Tolerance by 10%.'
+        '\nWarding: Increases Damage Tolerance by 20%.'
     ),
     30,
     @templar_id,
@@ -416,7 +416,7 @@ VALUES
 
 SET @skill_id = (SELECT id FROM skills WHERE name = 'Vicious Strike');
 
-INSERT INTO skill_levels (skill_id, level, min_dmg, max_dmg)
+INSERT INTO skill_levels (skill_id, level, var1, var2)
 VALUES
 (@skill_id, 1, 79, 79), (@skill_id, 2, 118, 118), (@skill_id, 3, 158, 158),
 (@skill_id, 4, 198, 198), (@skill_id, 5, 258, 258), (@skill_id, 6, 332, 332),
@@ -426,7 +426,7 @@ VALUES
 
 SET @skill_id = (SELECT id FROM skills WHERE name = 'Pummel');
 
-INSERT INTO skill_levels (skill_id, level, min_dmg, max_dmg)
+INSERT INTO skill_levels (skill_id, level, var1, var2)
 VALUES
 (@skill_id, 1, 93, 93), (@skill_id, 2, 143, 143), (@skill_id, 3, 193, 193),
 (@skill_id, 4, 243, 243), (@skill_id, 5, 318, 318), (@skill_id, 6, 412, 412),
@@ -436,12 +436,22 @@ VALUES
 
 SET @skill_id = (SELECT id FROM skills WHERE name = 'Poach');
 
-INSERT INTO skill_levels (skill_id, level, min_dmg, max_dmg)
+INSERT INTO skill_levels (skill_id, level, var1, var2)
 VALUES
 (@skill_id, 1, 49, 49), (@skill_id, 2, 86, 86), (@skill_id, 3, 123, 123),
 (@skill_id, 4, 160, 160), (@skill_id, 5, 215, 215), (@skill_id, 6, 283, 283),
 (@skill_id, 7, 364, 364), (@skill_id, 8, 433, 433), (@skill_id, 9, 501, 501),
 (@skill_id, 10, 569, 569)
+;
+
+SET @skill_id = (SELECT id FROM skills WHERE name = 'Warding Strike');
+
+INSERT INTO skill_levels (skill_id, level, var1, var2, var3)
+VALUES
+(@skill_id, 1, 388, 180, 198), (@skill_id, 2, 522, 235, 259), (@skill_id, 3, 688, 296, 326),
+(@skill_id, 4, 886, 437, 481), (@skill_id, 5, 1051, 510, 561), (@skill_id, 6, 1217, 625, 688),
+(@skill_id, 7, 1383, 739, 813), (@skill_id, 8, 1549, 80, 890), (@skill_id, 9, 1746, 941, 1041),
+(@skill_id, 10, 1912, 1015, 1117)
 ;
 
 
@@ -455,14 +465,3 @@ VALUES
 (16, 'Adds [{skill}] Chain Skill'),
 (8, '-20% MP consumed')
 ;
-
-INSERT INTO skill_specialties (skill_id, specialty_id)
-SELECT skills.id, specialties.id
-FROM skills CROSS JOIN specialties
-WHERE skills.name = 'Vicious Strike' AND specialty.descr IN (
-    '+20% MP restored',
-    'Absorbs 1% HP',
-    '+50% Mult-Hit on hit',
-    '-2s [Warding Strike] cooldown on hit',
-    'Adds [Threatening Blow] Chain Skill'
-);

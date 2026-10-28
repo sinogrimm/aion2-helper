@@ -43,4 +43,26 @@ router.get('/skill/:id', async(req, res) => {
     }
 })
 
+/**
+ * Sends request to get level info for a skill.
+ */
+router.get('/lvinfo/:id', async(req, res) => {
+    const id = req.params.id;
+
+    try {
+        const query = `
+            SELECT var1, var2, var3
+            FROM skill_levels
+            WHERE skill_id = ${id}
+        ;`;
+
+        const [lvInfo] = await db.query(query);
+
+        res.status(200).json({lvInfo});
+
+    } catch (err) {
+        res.status(500).send("Error executing queries.")
+    }
+})
+
 module.exports = router;

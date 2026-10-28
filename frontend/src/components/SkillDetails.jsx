@@ -1,5 +1,5 @@
 import { useState, useEffect, useMemo } from 'react';
-import { getSkill, getImage } from '../../api/SkillsAPI';
+import { getSkill, getImage, getLvInfo } from '../../api/SkillsAPI';
 
 function SkillDetails({ skID }) {
 
@@ -7,8 +7,37 @@ function SkillDetails({ skID }) {
     const [image, setImage] = useState([]);
     const [level, setLevel] = useState('1');
     const [input, setInput] = useState('');
+    const [lvInfo, setLvInfo] = useState([]);
+    const [detail, setDetail] = useState('');
 
     const cost = [0, 1, 2, 3, 5, 7, 9, 13, 17, 21];
+
+    const fillDescription = (skill, lv, info) => {
+        let newValues = info[lv - 1];
+        let fillValues = [];
+        //console.log(newValues);
+        for (const key of Object.keys(newValues)) {
+            if (newValues[key] != null) {
+                fillValues.push(newValues[key]);
+            }
+        }
+        //console.log(fillValues);
+
+        let sections = skill['detailed_descr'].split("X")
+        //console.log(sections);
+        //let newDescr = skill['detailed_descr'];
+        let detail = [];
+        detail.push(sections[0])
+        for (let i = 0; i < fillValues.length; ++i) {
+            //newDescr = newDescr.replace("X", String(fillValues[i]));
+            //console.log(newDescr);
+            detail.push(<span className='red' key={i}>{fillValues[i]}</span>);
+            detail.push(sections[i + 1]);
+        }
+        //console.log(detail);
+        setDetail(detail);
+        //console.log(newDescr);
+    }
 
     const loadDetails = async() => {
         try {
@@ -20,10 +49,18 @@ function SkillDetails({ skID }) {
                 const image = getImage(skill['name']);
                 //console.log(image);
                 setImage(image);
-                
+
                 setLevel('1');
                 setInput('1');
+
+                //console.log(skill['detailed_descr']);
+                const lvInfo = await getLvInfo(skID);
+                //console.log(lvInfo);
+                setLvInfo(lvInfo);
+
+                fillDescription(skill, 1, lvInfo);
             }
+
         } catch (err) {
             console.log(`Failed to load skill details: ${err}`)
         }
@@ -35,6 +72,8 @@ function SkillDetails({ skID }) {
         if (newLevel > 10) { newLevel = 10; }
         setLevel(newLevel);
         setInput(newLevel);
+
+        fillDescription(skill, newLevel, lvInfo);
     }
 
     useEffect(() => {
@@ -71,11 +110,11 @@ function SkillDetails({ skID }) {
                 </div>
                 <div className='bar'>
                     <img className="currency" src="/wisdom_stone.webp"/>
-                    <p className='bartext'>{cost[level - 1]}</p>
+                    <p id="changeable" className='bartext'>{cost[level - 1]}</p>
                 </div>
             </div>
             <hr/>
-            <p className='details'>{skill["detailed_descr"]}</p>
+            <p className='details'>{detail}</p>
             <p className='details'>Cooldown: {skill['cooldown']}s</p>
             <hr/>
             <div className='details'>
