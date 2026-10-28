@@ -32,4 +32,23 @@ const getSkillImages = (skills) => {
     return images;
 }
 
-export { getSkills, getSkillsByTag, getSkillImages }
+const getSkill = async (id) => {
+    // wait for HTTP response
+    const res = await fetch(`${backendURL}/skill/${id}`);
+
+    // wait for parsed json of response
+    // receiving {"skills": [{key: value}]}
+    // destructure object, then array
+    const {skill: [skill]} = await res.json();
+    //console.log(skill);
+    
+    return skill;
+}
+
+const getImage = (skName) => {
+    const path = skName.toLowerCase().replaceAll(' ', '_');
+    const image = `/${path}.webp`;
+    return image;
+}
+
+export { getSkills, getSkillsByTag, getSkillImages, getSkill, getImage }

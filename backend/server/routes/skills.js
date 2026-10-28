@@ -24,4 +24,23 @@ router.get('/skills/:id', async (req, res) => {
     
 });
 
+router.get('/skill/:id', async(req, res) => {
+    const id = req.params.id;
+
+    try {
+        const query = `
+            SELECT name, detailed_descr, cooldown
+            FROM skills
+            WHERE id = ${id}
+        ;`;
+
+        const [skill] = await db.query(query);
+
+        res.status(200).json({skill});
+
+    } catch (err) {
+        res.status(500).send("Error executing queries.")
+    }
+})
+
 module.exports = router;

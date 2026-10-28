@@ -23,6 +23,9 @@ function SkillsReference() {
     const [selectedSkillID, setSelectedSkillID] = useState('');
     
 
+
+    
+
     const loadDropdown = async() => {
         try {
             const { classes } = await getClasses();
@@ -91,7 +94,7 @@ function SkillsReference() {
                     skills={displayedSkills} id={selectedSkillID} setID={setSelectedSkillID}
                     images={images}
                 />
-                <SkillDetails/>
+                <SkillDetails skID={selectedSkillID}/>
             </div>
         </div>
     )
