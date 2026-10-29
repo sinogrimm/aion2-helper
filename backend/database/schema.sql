@@ -46,7 +46,7 @@ CREATE TABLE skills (
 CREATE TABLE skill_levels (
     skill_id INT NOT NULL,
     level INT NOT NULL,
-    var1 INT NOT NULL,
+    var1 INT,
     var2 INT,
     var3 INT,
     PRIMARY KEY (skill_id, level),
@@ -58,7 +58,6 @@ CREATE TABLE skill_levels (
 -- m:m relationship between specialties and skills
 CREATE TABLE specialties (
     id INT AUTO_INCREMENT PRIMARY KEY,
-    level INT NOT NULL,
     descr varchar(200) UNIQUE NOT NULL
 );
 

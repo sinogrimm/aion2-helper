@@ -48,17 +48,17 @@ function SkillsReference() {
     const loadSkillsList = async() => {
         try {
             if (selectedClassID != '') {
+                const { skills } = await getSkills(selectedClassID);
+                setSkills(skills);
+                const images = getSkillImages(skills);
+                setImages(images);
 
                 if (selectedTagID != '') {
                     const filteredSkills = getSkillsByTag(skills, Number(selectedTagID));
                     setDisplayedSkills(filteredSkills);
-
+                    
                 } else {
-                    const { skills } = await getSkills(selectedClassID);
-                    setSkills(skills);
                     setDisplayedSkills(skills);
-                    const images = getSkillImages(skills);
-                    setImages(images);
                 }
 
             } else {
