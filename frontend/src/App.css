@@ -121,3 +121,34 @@
 .blue {
   color: dodgerblue;
 }
+
+.topbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+}
+
+#help {
+  height: 30px;
+  padding: 0px 10px;
+  font-family: inherit;
+  font-size: 18px;
+}
+
+#hidehelp {
+  visibility: hidden;
+}
+
+.overlay {
+  margin: 0;
+  z-index: 1;
+  position: absolute;
+  right: 0;
+  top: 70%;
+  width: 180px;
+  background-color: whitesmoke;
+  border: 1px solid black;
+  padding: 5px;
+  padding-left: 20px;
+}

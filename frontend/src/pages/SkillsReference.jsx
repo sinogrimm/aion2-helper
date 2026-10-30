@@ -22,9 +22,8 @@ function SkillsReference() {
 
     const [selectedSkillID, setSelectedSkillID] = useState('');
     
+    const [help, setHelp] = useState(false);
 
-
-    
 
     const loadDropdown = async() => {
         try {
@@ -56,7 +55,7 @@ function SkillsReference() {
                 if (selectedTagID != '') {
                     const filteredSkills = getSkillsByTag(skills, Number(selectedTagID));
                     setDisplayedSkills(filteredSkills);
-                    
+
                 } else {
                     setDisplayedSkills(skills);
                 }
@@ -84,9 +83,22 @@ function SkillsReference() {
                 Explore combat skills for different classes in AION2 to figure out how they work
                  together and how much investment makes an impact.
             </p>
-            <div className="classview">
-                <h2>Class:</h2>
-                <ClassDropdown classes={classes} id={selectedClassID} setID={setSelectedClassID}/>
+            <div className='topbar'>
+                <div className="classview">
+                    <h2>Class:</h2>
+                    <ClassDropdown classes={classes} id={selectedClassID} setID={setSelectedClassID}/>
+                </div>
+                <button id='help' onClick={(e) => {
+                    if (help) {setHelp(false);}
+                    else {setHelp(true);}
+                }}>Help</button>
+                <ol className='overlay' id={help ? 'showhelp' : 'hidehelp'} >
+                    <li>Select class from dropdown.</li>
+                    <li>Select tag button to filter by skill type.</li>
+                    <li>Click on skill to view details.</li>
+                    <li>Input number or move slider to change skill level.</li>
+                    <li>Select checkbox to mark specialties.</li>
+                </ol>
             </div>
             <div className="skillview">
                 <SkillsList 
