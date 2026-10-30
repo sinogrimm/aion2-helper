@@ -1,5 +1,5 @@
 import { useState, useEffect, useMemo } from 'react';
-import { getSkill, getImage, getLvInfo } from '../../api/SkillsAPI';
+import { getSkill, getImage, getLvInfo, getSpecs } from '../../api/SkillsAPI';
 
 function SkillDetails({ skID }) {
 
@@ -9,6 +9,9 @@ function SkillDetails({ skID }) {
     const [input, setInput] = useState('');
     const [lvInfo, setLvInfo] = useState([]);
     const [detail, setDetail] = useState('');
+    const [specs, setSpecs] = useState([]);
+    const [cd, setCd] = useState('');
+    
 
     const cost = [0, 1, 2, 3, 5, 7, 9, 13, 17, 21];
 
@@ -45,6 +48,7 @@ function SkillDetails({ skID }) {
                 const skill = await getSkill(skID);
                 //console.log(skill);
                 setSkill(skill);
+                setCd(skill['cooldown']);
 
                 const image = getImage(skill['name']);
                 //console.log(image);
@@ -59,6 +63,10 @@ function SkillDetails({ skID }) {
                 setLvInfo(lvInfo);
 
                 fillDescription(skill, 1, lvInfo);
+
+                const specs = await getSpecs(skID);
+                setSpecs(specs);
+                //console.log(specs);
             }
 
         } catch (err) {
@@ -74,6 +82,32 @@ function SkillDetails({ skID }) {
         setInput(newLevel);
 
         fillDescription(skill, newLevel, lvInfo);
+    }
+
+    const changeCooldown = (e, description) => {
+        if (e.target.checked) {
+            if (description === 'Remove cooldown') {
+                setCd(<span className='blue'>0</span>);
+            } else {
+                if (description.length === 12 || description.length === 13) {
+                    let num = description[1];
+                    let match = description[0] ;
+                    if (description.length === 12) {
+                        match += description.slice(2);
+                    }
+                    if (description.length === 13) {
+                        num += description[2];
+                        match += description.slice(3)
+                    }
+                    //console.log(num, match);
+                    if (match === '-s cooldown') {
+                        setCd(<span className='blue'>{skill['cooldown'] - Number(num)}</span>)
+                    }
+                }
+            }
+        } else {
+            setCd(skill['cooldown']);
+        }
     }
 
     useEffect(() => {
@@ -115,16 +149,19 @@ function SkillDetails({ skID }) {
             </div>
             <hr/>
             <p className='details'>{detail}</p>
-            <p className='details'>Cooldown: {skill['cooldown']}s</p>
+            <p className='details'>Cooldown: {cd}s</p>
             <hr/>
             <div className='details'>
-                <input type='checkbox' id='spec1'/>
-                <label htmlFor='spec1'>specialties</label>
+                {specs.map((spec, index) => (
+                    <div key={spec['id']}>
+                        <input type='checkbox' id={spec['id']}
+                            onChange={(e) => changeCooldown(e, spec['descr'])}
+                        />
+                        <label htmlFor={spec['id']}>{spec['descr']}</label>
+                    </div>
+                ))}
             </div>
-            <hr/>
-            <div>
-                <button>related skills</button>
-            </div>
+
             
         </div>
     )}

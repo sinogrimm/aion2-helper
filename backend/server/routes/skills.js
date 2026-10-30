@@ -65,4 +65,30 @@ router.get('/lvinfo/:id', async(req, res) => {
     }
 })
 
+/**
+ * Sends request to get specializations info for a skill.
+ */
+router.get('/skSpecs/:id', async(req, res) => {
+    const id = req.params.id;
+
+    try {
+        const query = `
+            SELECT specialties.id, specialties.descr
+            FROM skills
+                LEFT JOIN skill_specialties
+                ON skills.id = skill_specialties.skill_id
+                LEFT JOIN specialties
+                ON skill_specialties.specialty_id = specialties.id
+            WHERE skills.id = ${id}
+        ;`;
+
+        const [specs] = await db.query(query);
+
+        res.status(200).json({specs});
+
+    } catch (err) {
+        res.status(500).send("Error executing queries.")
+    }
+})
+
 module.exports = router;

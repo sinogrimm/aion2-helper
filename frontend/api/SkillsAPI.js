@@ -59,4 +59,16 @@ const getLvInfo = async (skID) => {
     return lvInfo;
 }
 
-export { getSkills, getSkillsByTag, getSkillImages, getSkill, getImage, getLvInfo }
+const getSpecs = async (skID) => {
+    const res = await fetch(`${backendURL}/skSpecs/${skID}`);
+    let {specs} = await res.json();
+    
+    if (specs[0]['descr'] === null) {
+        specs = [];
+    }
+    //console.log(specs);
+    return specs;
+}
+
+export { getSkills, getSkillsByTag, getSkillImages,
+    getSkill, getImage, getLvInfo, getSpecs }
