@@ -1,2 +1,5 @@
-# aion2-helper
-[cs361 project] tool for player build and glam needs
+# Aion 2 Helper
+[CS 361 Project: Main Program] Skills Reference Tool
+
+Currently includes skills for the Templar and Ranger class.
+
