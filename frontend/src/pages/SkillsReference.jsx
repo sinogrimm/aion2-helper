@@ -92,7 +92,7 @@ function SkillsReference() {
                     if (help) {setHelp(false);}
                     else {setHelp(true);}
                 }}>Help</button>
-                <ol className='overlay' id={help ? 'showhelp' : 'hidehelp'} >
+                <ol className={help ? 'show' : 'hide'} id='helpoverlay'>
                     <li>Select class from dropdown.</li>
                     <li>Select tag button to filter by skill type.</li>
                     <li>Click on skill to view details.</li>

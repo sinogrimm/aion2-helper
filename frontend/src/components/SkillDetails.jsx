@@ -1,4 +1,4 @@
-import { useState, useEffect, useMemo } from 'react';
+import { useState, useEffect } from 'react';
 import { getSkill, getImage, getLvInfo, getSpecs } from '../../api/SkillsAPI';
 
 function SkillDetails({ skID }) {
@@ -11,7 +11,7 @@ function SkillDetails({ skID }) {
     const [detail, setDetail] = useState('');
     const [specs, setSpecs] = useState([]);
     const [cd, setCd] = useState('');
-    
+
 
     const cost = [0, 1, 2, 3, 5, 7, 9, 13, 17, 21];
 
