@@ -1,6 +1,5 @@
 import { useState, useEffect } from 'react';
 
-
 import ClassDropdown from "../components/ClassDropdown";
 import SkillsList from "../components/SkillsList";
 import SkillDetails from "../components/SkillDetails";

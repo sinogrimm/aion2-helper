@@ -1,12 +1,10 @@
-import { useState, useMemo, useTransition } from 'react';
+import { useState } from 'react';
 
 function SkillsList({ tags, tagID, setTagID, skills, id, setID, images }) {
     const [pop, setPop] = useState(false);
     const [checked, setChecked] = useState(false);
     const [click, setClick] = useState(0);
     const [hostage, setHostage] = useState(0);
-
-    ///const handleSkSelect = (e)
 
     return (
         <div className="column">
