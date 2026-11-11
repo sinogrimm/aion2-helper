@@ -3,9 +3,9 @@ import { useState } from 'react';
 
 import { getFilteredSkills } from "../../api/FilterAPI";
 
-function SubFilter ({skills, setSkills}) {
+function SubFilter ({skills, setSkills, options, setOptions}) {
     const [menu, setMenu] = useState(false);
-    const [options, setOptions] = useState([]);
+    const [optionsQ, setOptionsQ] = useState([]);
 
     const handleIconClick = () => {
         menu ? setMenu(false) : setMenu(true);
@@ -14,16 +14,17 @@ function SubFilter ({skills, setSkills}) {
     const handleForm = async (e) => {
         e.preventDefault();
         setMenu(false);
-        const newSkills = await getFilteredSkills(options, skills);
-        console.log(newSkills);
+        const newSkills = await getFilteredSkills(optionsQ, skills);
+        //console.log(newSkills);
         setSkills(newSkills);
+        setOptions(optionsQ);
     }
 
     const handleCheck = (e) => {
         if (e.target.checked) {
-            setOptions(prevOptions => [...prevOptions, e.target.value]);
+            setOptionsQ(prevOptionsQ => [...prevOptionsQ, e.target.value]);
         } else {
-            setOptions(prevOptions => prevOptions.filter(option => option != e.target.value));
+            setOptionsQ(prevOptionsQ => prevOptionsQ.filter(option => option != e.target.value));
         }
     }
 

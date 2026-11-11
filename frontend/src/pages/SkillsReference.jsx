@@ -6,6 +6,7 @@ import SkillDetails from "../components/SkillDetails";
 import { getClasses } from '../../api/ClassAPI';
 import { getSkills, getSkillsByTag, getSkillImages } from '../../api/SkillsAPI';
 import { getTags } from '../../api/TagAPI';
+import { getFilteredSkills } from "../../api/FilterAPI";
 
 function SkillsReference() {
     const [classes, setClasses] = useState([]);
@@ -22,6 +23,8 @@ function SkillsReference() {
     const [selectedSkillID, setSelectedSkillID] = useState('');
     
     const [help, setHelp] = useState(false);
+
+    const [options, setOptions] = useState([]);
 
 
     const loadDropdown = async() => {
@@ -46,18 +49,21 @@ function SkillsReference() {
     const loadSkillsList = async() => {
         try {
             if (selectedClassID != '') {
-                const { skills } = await getSkills(selectedClassID);
+                let { skills } = await getSkills(selectedClassID);
                 setSkills(skills);
                 const images = getSkillImages(skills);
                 setImages(images);
 
                 if (selectedTagID != '') {
-                    const filteredSkills = getSkillsByTag(skills, Number(selectedTagID));
-                    setDisplayedSkills(filteredSkills);
-
-                } else {
-                    setDisplayedSkills(skills);
+                    skills = getSkillsByTag(skills, Number(selectedTagID));
                 }
+                //console.log(options);
+                if (options.length != 0) {
+                    console.log(skills);
+                    skills = await getFilteredSkills(options, skills);
+                }
+
+                setDisplayedSkills(skills);
 
             } else {
                 setSkills([]);
@@ -72,7 +78,7 @@ function SkillsReference() {
         loadDropdown();
         loadFilter();
         loadSkillsList();
-    }, [selectedClassID, selectedTagID]);
+    }, [selectedClassID, selectedTagID, options]);
 
 
     return (
@@ -105,6 +111,7 @@ function SkillsReference() {
                     skills={displayedSkills} setSkills={setDisplayedSkills}
                     id={selectedSkillID} setID={setSelectedSkillID}
                     images={images}
+                    options={options} setOptions={setOptions}
                 />
                 <SkillDetails skID={selectedSkillID}/>
             </div>
