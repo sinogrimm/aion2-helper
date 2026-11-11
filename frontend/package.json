@@ -17,7 +17,9 @@
     "path": "^0.12.7",
     "react": "^19.2.8",
     "react-dom": "^19.2.8",
-    "react-router-dom": "^7.18.4"
+    "react-icons": "^5.7.0",
+    "react-router-dom": "^7.18.4",
+    "zeromq": "^6.8.0"
   },
   "devDependencies": {
     "@types/react": "^19.2.18",

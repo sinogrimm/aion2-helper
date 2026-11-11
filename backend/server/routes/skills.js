@@ -8,7 +8,7 @@ router.get('/skills/:id', async (req, res) => {
 
     try {
         const query = `
-            SELECT * FROM skills
+            SELECT id, tag_id, name, brief_descr FROM skills
             WHERE class_id = ${id}
             ORDER BY lv_unlock ASC
             ;`;

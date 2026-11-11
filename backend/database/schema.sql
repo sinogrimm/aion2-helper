@@ -1,5 +1,6 @@
 DROP TABLE IF EXISTS skill_relations;
 DROP TABLE IF EXISTS skill_specialties;
+DROP TABLE IF EXISTS skill_tags;
 DROP TABLE IF EXISTS specialties;
 DROP TABLE IF EXISTS skill_levels;
 DROP TABLE IF EXISTS skills;
@@ -40,6 +41,14 @@ CREATE TABLE skills (
 -- the amount needed to upgrade each skill from 1 to 10 stays the same
 -- so it will be handled by a constant array
 -- skill_costs = [0, 1, 2, 3, 5, 7, 9, 13, 17, 21]
+
+CREATE TABLE skill_tags (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    skill_id INT NOT NULL,
+    tag_id INT NOT NULL,
+    FOREIGN KEY (skill_id) REFERENCES skills(id),
+    FOREIGN KEY (tag_id) REFERENCES tags(id)
+)
 
 -- for storing the damage ranges of the skill depending on the level
 -- m:1 relationship between skill_levels and skills

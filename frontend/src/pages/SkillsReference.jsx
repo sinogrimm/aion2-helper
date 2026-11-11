@@ -102,7 +102,8 @@ function SkillsReference() {
             <div className="skillview">
                 <SkillsList 
                     tags={tags} tagID={selectedTagID} setTagID={setSelectedTagID}
-                    skills={displayedSkills} id={selectedSkillID} setID={setSelectedSkillID}
+                    skills={displayedSkills} setSkills={setDisplayedSkills}
+                    id={selectedSkillID} setID={setSelectedSkillID}
                     images={images}
                 />
                 <SkillDetails skID={selectedSkillID}/>

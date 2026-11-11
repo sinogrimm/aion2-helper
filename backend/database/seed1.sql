@@ -7,10 +7,8 @@ VALUES ('Templar'), ('Ranger');
 
 INSERT INTO tags (name)
 VALUES ('Active'), ('Passive'), ('Stigma');
--- VALUES ('Active'), ('Passive'), ('Stigma'), ('Physical'), ('Magical'),
--- ('Debuff'), ('Buff'), ('Wind'), ('Fire'), ('Earth'), ('Water');
--- to minimize planning fallacy, only skill type tags are considered
--- the rest may be added in the future to expand the filter implementation
+-- only skill type tags are considered on the main database
+-- the rest of the subtags are on the filter microservice database
 
 INSERT INTO specialties (descr) VALUES
 ('+20% MP restored'),

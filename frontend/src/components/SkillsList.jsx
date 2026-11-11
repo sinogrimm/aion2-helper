@@ -1,6 +1,7 @@
 import { useState } from 'react';
+import SubFilter from './SubFilter';
 
-function SkillsList({ tags, tagID, setTagID, skills, id, setID, images }) {
+function SkillsList({ tags, tagID, setTagID, skills, setSkills, id, setID, images }) {
     const [pop, setPop] = useState(false);
     const [checked, setChecked] = useState(false);
     const [click, setClick] = useState(0);
@@ -25,6 +26,7 @@ function SkillsList({ tags, tagID, setTagID, skills, id, setID, images }) {
                         }}
                     >{tag['name']}</button>
                 ))}
+                <SubFilter skills={skills} setSkills={setSkills}/>
             </div>
             <div className="skillslist">
                 <div className={pop ? 'show' : 'hide'} id='alertoverlay'>
