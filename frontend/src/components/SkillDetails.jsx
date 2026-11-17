@@ -85,28 +85,32 @@ function SkillDetails({ skID }) {
     }
 
     const changeCooldown = (e, description) => {
-        if (e.target.checked) {
-            if (description === 'Remove cooldown') {
+        if (description === 'Remove cooldown') {
+            if (e.target.checked) {
                 setCd(<span className='blue'>0</span>);
             } else {
-                if (description.length === 12 || description.length === 13) {
-                    let num = description[1];
-                    let match = description[0] ;
-                    if (description.length === 12) {
-                        match += description.slice(2);
-                    }
-                    if (description.length === 13) {
-                        num += description[2];
-                        match += description.slice(3)
-                    }
-                    //console.log(num, match);
-                    if (match === '-s cooldown') {
+                setCd(skill['cooldown']);
+            }
+        } else {
+            if (description.length === 12 || description.length === 13) {
+                let num = description[1];
+                let match = description[0] ;
+                if (description.length === 12) {
+                    match += description.slice(2);
+                }
+                if (description.length === 13) {
+                    num += description[2];
+                    match += description.slice(3)
+                }
+                //console.log(num, match);
+                if (match === '-s cooldown') {
+                    if (e.target.checked) {
                         setCd(<span className='blue'>{skill['cooldown'] - Number(num)}</span>)
+                    } else {
+                        setCd(skill['cooldown']);
                     }
                 }
             }
-        } else {
-            setCd(skill['cooldown']);
         }
     }
 
