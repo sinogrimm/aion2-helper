@@ -59,7 +59,7 @@ function SkillsReference() {
                 }
                 //console.log(options);
                 if (options.length != 0) {
-                    console.log(skills);
+                    //console.log(skills);
                     skills = await getFilteredSkills(options, skills);
                 }
 
@@ -112,6 +112,7 @@ function SkillsReference() {
                     id={selectedSkillID} setID={setSelectedSkillID}
                     images={images}
                     options={options} setOptions={setOptions}
+                    allSkills={skills}
                 />
                 <SkillDetails skID={selectedSkillID}/>
             </div>

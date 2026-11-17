@@ -1,9 +1,10 @@
 import { LuFilter } from "react-icons/lu";
 import { useState } from 'react';
 
+import { getSkillsByTag } from "../../api/SkillsAPI";
 import { getFilteredSkills } from "../../api/FilterAPI";
 
-function SubFilter ({skills, setSkills, options, setOptions}) {
+function SubFilter ({skills, setSkills, options, setOptions, allSkills, tagID}) {
     const [menu, setMenu] = useState(false);
     const [optionsQ, setOptionsQ] = useState([]);
 
@@ -14,7 +15,16 @@ function SubFilter ({skills, setSkills, options, setOptions}) {
     const handleForm = async (e) => {
         e.preventDefault();
         setMenu(false);
-        const newSkills = await getFilteredSkills(optionsQ, skills);
+        let newSkills = allSkills;
+        //console.log(tagID, newSkills);
+        if (tagID != '') {
+            newSkills = getSkillsByTag(newSkills, Number(tagID));
+        }
+        //console.log(newSkills);
+        //console.log(optionsQ.length);
+        if (optionsQ.length != 0) {
+            newSkills = await getFilteredSkills(optionsQ, newSkills);
+        }
         //console.log(newSkills);
         setSkills(newSkills);
         setOptions(optionsQ);

@@ -7,7 +7,7 @@ const backendURL = import.meta.env.VITE_BACKEND_URL;
  */
 const getFilteredSkills = async (tags, displayedSkills) => {
     const skills = displayedSkills;
-    console.log(skills);
+    //console.log(skills);
 
     const response = await fetch(`${backendURL}/filter`, {
         method: 'POST',
@@ -20,7 +20,7 @@ const getFilteredSkills = async (tags, displayedSkills) => {
     });
 
     const {items} = await response.json();
-    console.log(items);
+    //console.log(items);
     return items;
     
 }
